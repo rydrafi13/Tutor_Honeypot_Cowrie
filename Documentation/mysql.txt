@@ -1,0 +1,23 @@
+sudo apt-get install mysql-server libmysqlclient-dev python-mysqldb
+su - cowrie
+source cowrie/cowrie-env/bin/activate
+
+
+mysql -u root -p
+CREATE DATABASE cowrie;
+GRANT ALL ON cowrie.* TO 'cowrie'@'localhost' IDENTIFIED BY 'password';
+GRANT INSERT, SELECT, UPDATE ON cowrie.* TO 'cowrie'@'localhost' IDENTIFIED BY 'password';
+FLUSH PRIVILEGES;
+exit
+
+cd ~/cowrie/docs/sql/
+mysql -u cowrie -p
+USE cowrie;
+source mysql.sql;
+exit
+
+nano etc/cowrie.cfg
+
+cd ~/cowrie/bin/
+./cowrie restart
+

@@ -1,0 +1,14 @@
+apt-get update && apt-get install -y libapache2-mod-php php-mysql php-gd php-curl
+/etc/init.d/apache2 restart
+
+git clone https://github.com/ikoniaris/kippo-graph
+mv -v kippo-graph /var/www/html
+cd kippo-graph
+chmod 777 generated-graphs
+cp config.php.dist config.php
+nano config.php
+
+sudo apt-get install acl
+sudo setfacl -Rm g:www-data:rx ~/cowrie/var/lib/cowrie/tty/
+
+systemctl restart apache2 
